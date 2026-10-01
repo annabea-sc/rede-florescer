@@ -1,177 +1,672 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
+<html lang="pt-BR">
+
+<head>
     <meta charset="UTF-8">
-    <style>
-      body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-    background-color: #f5f7f2;
-    color: #2f3e2f;
-}
-
-header {
-    background-color: #6a994e;
-    color: white;
-    text-align: center;
-    padding: 40px 20px;
-}
-
-header h1 {
-    margin: 0;
-    font-size: 40px;
-}
-
-header p {
-    margin: 10px 0 0;
-    font-size: 18px;
-}
-
-nav {
-    background-color: #386641;
-    text-align: center;
-    padding: 15px;
-}
-
-nav a {
-    color: white;
-    text-decoration: none;
-    margin: 0 15px;
-    font-weight: bold;
-}
-
-nav a:hover {
-    text-decoration: underline;
-}
-
-main {
-    max-width: 1000px;
-    margin: 30px auto;
-    padding: 0 20px;
-}
-
-section {
-    background-color: white;
-    margin-bottom: 20px;
-    padding: 25px;
-    border-radius: 10px;
-}
-
-section h2 {
-    color: #386641;
-}
-
-footer {
-    background-color: #2f3e2f;
-    color: white;
-    text-align: center;
-    padding: 20px;
-    margin-top: 40px;
-}
-    </style>
-    
-    <link rel="stylesheet" href="./style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pen</title>
-  </head>
-  <body>
-<header>
-  <h1>Rede Florecer</h1>
-  <p>Transformando vidas através da solidariedade.</p>
-</header>
+    <title>Rede Florescer</title>
+
+    <style>
+        :root {
+            --color-primary: #386641;
+            --color-secondary: #6a994e;
+            --color-accent: #a7c957;
+            --color-highlight: #f2e8cf;
+            --color-background: #f5f7f2;
+            --color-surface: #ffffff;
+            --color-text: #2f3e2f;
+            --color-border: #b7c9ad;
+            --color-error: #b3261e;
+            --color-success: #2e7d32;
+
+            --font-family: Arial, sans-serif;
+            --font-size-xl: 2.5rem;
+            --font-size-lg: 2rem;
+            --font-size-md: 1.5rem;
+            --font-size-base: 1rem;
+            --font-size-sm: 0.875rem;
+
+            --space-1: 4px;
+            --space-2: 8px;
+            --space-3: 16px;
+            --space-4: 24px;
+            --space-5: 32px;
+            --space-6: 48px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: var(--font-family);
+            font-size: var(--font-size-base);
+            line-height: 1.6;
+            background-color: var(--color-background);
+            color: var(--color-text);
+        }
+
+        header {
+            background-color: var(--color-secondary);
+            color: var(--color-surface);
+            text-align: center;
+            padding: var(--space-6) var(--space-3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: var(--font-size-xl);
+        }
+
+        header p {
+            margin: var(--space-2) 0 0;
+            font-size: var(--font-size-md);
+        }
+
+        nav {
+            background-color: var(--color-primary);
+            padding: var(--space-3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .menu-links {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--space-3);
+        }
+
+        nav a {
+            color: var(--color-surface);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: var(--font-size-base);
+        }
+
+        nav a:hover,
+        nav a:focus-visible {
+            text-decoration: underline;
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown > a {
+            display: flex;
+            align-items: center;
+            gap: var(--space-1);
+        }
+
+        .dropdown > a::after {
+            content: "▾";
+            font-size: var(--font-size-sm);
+        }
+
+        .dropdown-content {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            min-width: 190px;
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 6px;
+            padding: var(--space-2);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            display: none;
+            z-index: 10;
+        }
+
+        .dropdown-content a {
+            display: block;
+            color: var(--color-text);
+            padding: var(--space-2);
+            text-decoration: none;
+        }
+
+        .dropdown-content a:hover,
+        .dropdown-content a:focus-visible {
+            background-color: var(--color-highlight);
+            text-decoration: none;
+        }
+
+        .dropdown:hover .dropdown-content,
+        .dropdown:focus-within .dropdown-content,
+        .dropdown.aberto .dropdown-content {
+            display: block;
+        }
+
+        .menu-toggle {
+            display: none;
+            background-color: transparent;
+            color: var(--color-surface);
+            border: 2px solid var(--color-surface);
+            border-radius: 6px;
+            padding: var(--space-2) var(--space-3);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .menu-toggle:hover {
+            background-color: var(--color-secondary);
+        }
+
+        main {
+            max-width: 1200px;
+            margin: var(--space-5) auto;
+            padding: 0 var(--space-3);
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: var(--space-3);
+        }
+
+        main > p {
+            grid-column: 1 / -1;
+        }
+
+        section {
+            background-color: var(--color-surface);
+            margin-bottom: var(--space-3);
+            padding: var(--space-4);
+            border-radius: 10px;
+        }
+
+        section:nth-of-type(1),
+        section:nth-of-type(2),
+        section:nth-of-type(3),
+        section:nth-of-type(4) {
+            grid-column: span 6;
+        }
+
+        section:nth-of-type(5),
+        section:nth-of-type(6),
+        section:nth-of-type(7) {
+            grid-column: span 4;
+        }
+
+        section h2 {
+            color: var(--color-primary);
+            font-size: var(--font-size-lg);
+        }
+
+        section h3 {
+            font-size: var(--font-size-md);
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        /* BADGES */
+
+        .badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-2);
+            margin-top: var(--space-3);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 20px;
+            background-color: var(--color-highlight);
+            color: var(--color-primary);
+            border: 1px solid var(--color-accent);
+            font-size: var(--font-size-sm);
+            font-weight: bold;
+        }
+
+        .badge:hover {
+            background-color: var(--color-accent);
+        }
+
+        /* ALERTA */
+
+        .alerta {
+            grid-column: 1 / -1;
+            background-color: #f3faf3;
+            color: var(--color-success);
+            border: 2px solid var(--color-success);
+            border-radius: 8px;
+            padding: var(--space-3);
+            margin-bottom: var(--space-3);
+        }
+
+        .alerta strong {
+            display: block;
+            margin-bottom: var(--space-1);
+        }
+
+        /* BOTÃO DO MODAL */
+
+        .botao-modal {
+            margin-top: var(--space-3);
+            padding: var(--space-2) var(--space-3);
+            border: 2px solid var(--color-primary);
+            border-radius: 6px;
+            background-color: var(--color-primary);
+            color: var(--color-surface);
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .botao-modal:hover {
+            background-color: var(--color-secondary);
+        }
+
+        .botao-modal:focus-visible {
+            outline: 3px solid var(--color-accent);
+            outline-offset: 3px;
+        }
+
+        /* MODAL */
+
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.55);
+            align-items: center;
+            justify-content: center;
+            padding: var(--space-3);
+            z-index: 100;
+        }
+
+        .modal.aberto {
+            display: flex;
+        }
+
+        .modal-conteudo {
+            max-width: 500px;
+            width: 100%;
+            background-color: var(--color-surface);
+            border: 2px solid var(--color-border);
+            border-radius: 10px;
+            padding: var(--space-5);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        .modal-conteudo h2 {
+            margin-top: 0;
+        }
+
+        .fechar-modal {
+            float: right;
+            border: 0;
+            background: transparent;
+            color: var(--color-text);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .fechar-modal:hover {
+            color: var(--color-error);
+        }
+
+        footer {
+            background-color: var(--color-text);
+            color: var(--color-surface);
+            text-align: center;
+            padding: var(--space-3);
+            margin-top: var(--space-6);
+        }
+
+        @media (max-width: 1200px) {
+            main {
+                padding: 0 var(--space-4);
+            }
+        }
+
+        @media (max-width: 992px) {
+            section:nth-of-type(1),
+            section:nth-of-type(2),
+            section:nth-of-type(3),
+            section:nth-of-type(4) {
+                grid-column: span 6;
+            }
+
+            section:nth-of-type(5),
+            section:nth-of-type(6),
+            section:nth-of-type(7) {
+                grid-column: span 6;
+            }
+        }
+
+        @media (max-width: 768px) {
+            main {
+                grid-template-columns: repeat(6, 1fr);
+            }
+
+            section {
+                grid-column: 1 / -1 !important;
+            }
+
+            header h1 {
+                font-size: var(--font-size-lg);
+            }
+
+            nav {
+                justify-content: flex-end;
+                position: relative;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .menu-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--color-primary);
+                padding: var(--space-3);
+                flex-direction: column;
+                align-items: stretch;
+                gap: var(--space-2);
+                z-index: 20;
+            }
+
+            .menu-links.aberto {
+                display: flex;
+            }
+
+            .menu-links > a,
+            .dropdown > a {
+                padding: var(--space-2);
+            }
+
+            .dropdown-content {
+                position: static;
+                width: 100%;
+                box-shadow: none;
+                margin-top: var(--space-1);
+            }
+
+            .dropdown:hover .dropdown-content {
+                display: none;
+            }
+
+            .dropdown.aberto .dropdown-content,
+            .dropdown:focus-within .dropdown-content {
+                display: block;
+            }
+        }
+
+        @media (max-width: 576px) {
+            main {
+                grid-template-columns: repeat(4, 1fr);
+                padding: 0 var(--space-2);
+            }
+
+            header {
+                padding: var(--space-5) var(--space-2);
+            }
+
+            header p {
+                font-size: var(--font-size-base);
+            }
+
+            section {
+                padding: var(--space-3);
+            }
+        }
+
+        @media (max-width: 400px) {
+            main {
+                grid-template-columns: 1fr;
+            }
+
+            section,
+            main > p {
+                grid-column: 1;
+            }
+
+            header h1 {
+                font-size: var(--font-size-md);
+            }
+
+            section h2 {
+                font-size: var(--font-size-md);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Rede Florescer</h1>
+        <p>Transformando vidas através da solidariedade.</p>
+    </header>
+
     <nav aria-label="Navegação principal">
-      <a href="index.html">Início</a>
-      <a href="projetos.html">Projetos</a>
-      <a href="cadastro.html">Quero ajudar</a>
+
+        <button class="menu-toggle"
+            id="menuToggle"
+            type="button"
+            aria-label="Abrir menu"
+            aria-expanded="false"
+            aria-controls="menuLinks">
+            ☰
+        </button>
+
+        <div class="menu-links" id="menuLinks">
+
+            <a href="index.html">Início</a>
+
+            <div class="dropdown" id="dropdownProjetos">
+                <a href="projetos.html">Projetos</a>
+
+                <div class="dropdown-content">
+                    <a href="projetos.html">Ver projetos</a>
+                    <a href="projetos.html">Educação e oportunidades</a>
+                    <a href="projetos.html">Apoio comunitário</a>
+                    <a href="projetos.html">Inclusão e cidadania</a>
+                </div>
+            </div>
+
+            <a href="cadastro.html">Quero ajudar</a>
+
+        </div>
     </nav>
-    
+
     <main>
-      <p> 
-      Conheça a Rede Florescer, nossos projetos e as formas de participar das nossas ações sociais.
-      </p>
-      
-    <section>
-        <h2>Quem somos</h2>
+
         <p>
-            A Rede Florecer atua para apoiar pessoas em situação de vulnerabilidade,
-            promovendo oportunidades, inclusão e transformação social.
+            Conheça a Rede Florescer, nossos projetos e as formas de participar
+            das nossas ações sociais.
         </p>
-    </section>
 
-    <section>
-        <h2>Nossa missão</h2>
-        <p>
-            Nosso objetivo é contribuir para uma sociedade mais justa por meio
-            de ações sociais, voluntariado e solidariedade.
-        </p>
-    </section>
+        <div class="alerta" role="status">
+            <strong>Informação importante</strong>
+            Conheça nossos projetos e escolha uma forma de participar da Rede Florescer.
+        </div>
 
-    <section>
-        <h2>Como ajudar</h2>
-        <p>
-            Você pode participar como voluntário, realizar uma doação ou
-            compartilhar nosso trabalho com outras pessoas.
-        </p>
-    </section>
-      <section>
-        <h2>Nosso impacto</h2>
-        <p>
-          A Rede Florescer desenvolve ações voltadas à inclusão social, educação e apoio comunitário, buscando ampliar oportunidades e fortalecer a autonomia das pessoas atendidas.
-        </p>
-      </section>
-      <section>
-    <h2>Faça parte</h2>
+        <section>
+            <h2>Quem somos</h2>
+            <p>
+                A Rede Florescer atua para apoiar pessoas em situação de vulnerabilidade,
+                promovendo oportunidades, inclusão e transformação social.
+            </p>
 
-    <h3>Seja voluntário</h3>
-    <p>
-        Compartilhe seu tempo e suas habilidades participando das nossas ações.
-    </p>
+            <div class="badges" aria-label="Categorias">
+                <span class="badge">Inclusão</span>
+                <span class="badge">Educação</span>
+                <span class="badge">Solidariedade</span>
+            </div>
+        </section>
 
-    <h3>Faça uma doação</h3>
-    <p>
-        Sua contribuição ajuda a manter projetos e ampliar o atendimento
-        às comunidades.
-    </p>
+        <section>
+            <h2>Nossa missão</h2>
+            <p>
+                Nosso objetivo é contribuir para uma sociedade mais justa por meio
+                de ações sociais, voluntariado e solidariedade.
+            </p>
+        </section>
 
-    <h3>Divulgue nossa causa</h3>
-    <p>
-        Compartilhe nosso trabalho e ajude a levar informação e oportunidades
-        para mais pessoas.
-    </p>
-</section>
-      <section>
-    <h2>Conheça a Rede Florescer</h2>
+        <section>
+            <h2>Como ajudar</h2>
+            <p>
+                Você pode participar como voluntário, realizar uma doação ou
+                compartilhar nosso trabalho com outras pessoas.
+            </p>
 
-    <img
-        src="imagem-rede-florescer.jpeg"
-        alt="Imagem ilustrativa representando pessoas reunidas em uma ação social da Rede Florescer"
-        style="max-width: 100%; border-radius: 10px;"
-    >
+            <button class="botao-modal" id="abrirModal" type="button">
+                Saiba mais
+            </button>
+        </section>
 
-    <p>
-        A Rede Florescer atua para apoiar pessoas em situação de vulnerabilidade,
-        promovendo oportunidades, inclusão e transformação social.
-    </p>
-</section>
+        <section>
+            <h2>Nosso impacto</h2>
+            <p>
+                A Rede Florescer desenvolve ações voltadas à inclusão social,
+                educação e apoio comunitário, buscando ampliar oportunidades
+                e fortalecer a autonomia das pessoas atendidas.
+            </p>
+        </section>
 
-<section>
-    <h2>Entre em contato</h2>
+        <section>
+            <h2>Faça parte</h2>
 
-    <p>
-        E-mail: contato@redeflorescer.org
-    </p>
+            <h3>Seja voluntário</h3>
+            <p>
+                Compartilhe seu tempo e suas habilidades participando das nossas ações.
+            </p>
 
-    <p>
-        Telefone: (41) 00000-0000
-    </p>
-</section>
-</main>
-    
+            <h3>Faça uma doação</h3>
+            <p>
+                Sua contribuição ajuda a manter projetos e ampliar o atendimento
+                às comunidades.
+            </p>
+
+            <h3>Divulgue nossa causa</h3>
+            <p>
+                Compartilhe nosso trabalho e ajude a levar informação e oportunidades
+                para mais pessoas.
+            </p>
+        </section>
+
+        <section>
+            <h2>Conheça a Rede Florescer</h2>
+
+            <img
+                src="imagem rede florescer.jpeg"
+                alt="Imagem ilustrativa representando pessoas reunidas em uma ação social da Rede Florescer"
+            >
+
+            <p>
+                A Rede Florescer atua para apoiar pessoas em situação de vulnerabilidade,
+                promovendo oportunidades, inclusão e transformação social.
+            </p>
+        </section>
+
+        <section>
+            <h2>Entre em contato</h2>
+            <p>E-mail: contato@redeflorescer.org</p>
+            <p>Telefone: (41) 00000-0000</p>
+        </section>
+
+    </main>
+
+    <div class="modal" id="modal" role="dialog" aria-modal="true"
+        aria-labelledby="tituloModal">
+
+        <div class="modal-conteudo">
+
+            <button class="fechar-modal" id="fecharModal"
+                type="button" aria-label="Fechar janela">
+                &times;
+            </button>
+
+            <h2 id="tituloModal">Participe da Rede Florescer</h2>
+
+            <p>
+                Você pode contribuir como voluntário, realizar uma doação
+                ou divulgar nossas ações para outras pessoas.
+            </p>
+
+            <p>
+                Toda participação ajuda a fortalecer nossas iniciativas
+                de inclusão, educação e apoio comunitário.
+            </p>
+
+        </div>
+    </div>
+
     <footer>
-      <p>&copy; 2026 Rede Florecer. Todos os direitos reservados.</p>
-      <p>Juntos, podemos transformar realidades.</p>
+        <p>&copy; 2026 Rede Florescer. Todos os direitos reservados.</p>
+        <p>Juntos, podemos transformar realidades.</p>
     </footer>
-    
-  </body>
+
+    <script>
+        const menuToggle = document.getElementById("menuToggle");
+        const menuLinks = document.getElementById("menuLinks");
+        const dropdownProjetos = document.getElementById("dropdownProjetos");
+
+        menuToggle.addEventListener("click", function () {
+            const aberto = menuLinks.classList.toggle("aberto");
+
+            menuToggle.setAttribute("aria-expanded", aberto);
+            menuToggle.setAttribute(
+                "aria-label",
+                aberto ? "Fechar menu" : "Abrir menu"
+            );
+        });
+
+        dropdownProjetos.querySelector("a").addEventListener("click", function (event) {
+            if (window.innerWidth <= 768) {
+                event.preventDefault();
+                dropdownProjetos.classList.toggle("aberto");
+            }
+        });
+
+        window.addEventListener("resize", function () {
+            if (window.innerWidth > 768) {
+                menuLinks.classList.remove("aberto");
+                dropdownProjetos.classList.remove("aberto");
+                menuToggle.setAttribute("aria-expanded", "false");
+                menuToggle.setAttribute("aria-label", "Abrir menu");
+            }
+        });
+
+        const modal = document.getElementById("modal");
+        const abrirModal = document.getElementById("abrirModal");
+        const fecharModal = document.getElementById("fecharModal");
+
+        abrirModal.addEventListener("click", function () {
+            modal.classList.add("aberto");
+        });
+
+        fecharModal.addEventListener("click", function () {
+            modal.classList.remove("aberto");
+        });
+
+        modal.addEventListener("click", function (event) {
+            if (event.target === modal) {
+                modal.classList.remove("aberto");
+            }
+        });
+
+        document.addEventListener("keydown", function (event) {
+            if (event.key === "Escape") {
+                modal.classList.remove("aberto");
+            }
+        });
+    </script>
+
+</body>
+
 </html>
