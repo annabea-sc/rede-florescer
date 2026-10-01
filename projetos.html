@@ -7,42 +7,87 @@
     <title>Projetos | Rede Florescer</title>
 
     <style>
+        :root {
+            --color-primary: #386641;
+            --color-secondary: #6a994e;
+            --color-accent: #a7c957;
+            --color-highlight: #f2e8cf;
+            --color-background: #f5f7f2;
+            --color-surface: #ffffff;
+            --color-text: #2f3e2f;
+            --color-border: #b7c9ad;
+
+            --font-family: Arial, sans-serif;
+            --font-size-xl: 2.5rem;
+            --font-size-lg: 2rem;
+            --font-size-md: 1.5rem;
+            --font-size-base: 1rem;
+            --font-size-sm: 0.875rem;
+
+            --space-1: 4px;
+            --space-2: 8px;
+            --space-3: 16px;
+            --space-4: 24px;
+            --space-5: 32px;
+            --space-6: 48px;
+            --space-7: 64px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             margin: 0;
-            font-family: Arial, sans-serif;
+            font-family: var(--font-family);
+            font-size: var(--font-size-base);
             line-height: 1.6;
-            background-color: #f5f7f2;
-            color: #2f3e2f;
+            background-color: var(--color-background);
+            color: var(--color-text);
         }
 
         header {
-            background-color: #6a994e;
-            color: white;
-            text-align: center;
-            padding: 40px 20px;
-        }
+    background-color: var(--color-secondary);
+    color: var(--color-surface);
+    text-align: center;
+    padding: var(--space-6) var(--space-3);
+
+    /* Flexbox */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
 
         header h1 {
             margin: 0;
-            font-size: 40px;
+            font-size: var(--font-size-xl);
         }
 
         header p {
-            margin: 10px 0 0;
-            font-size: 18px;
+            margin: var(--space-2) 0 0;
+            font-size: var(--font-size-md);
         }
 
         nav {
-            background-color: #386641;
-            text-align: center;
-            padding: 15px;
-        }
+    background-color: var(--color-primary);
+    text-align: center;
+    padding: var(--space-3);
+
+    /* Flexbox */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+}
 
         nav a {
-            color: white;
+            color: var(--color-surface);
             text-decoration: none;
-            margin: 0 15px;
+          
             font-weight: bold;
+            font-size: var(--font-size-base);
         }
 
         nav a:hover {
@@ -50,28 +95,120 @@
         }
 
         main {
-            max-width: 1000px;
-            margin: 30px auto;
-            padding: 0 20px;
+            max-width: 1200px;
+            margin: var(--space-5) auto;
+            padding: 0 var(--space-3);
+
+            /* Grid de 12 colunas */
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: var(--space-3);
+        }
+
+        main > p {
+            grid-column: 1 / -1;
         }
 
         section {
-            background-color: white;
-            margin-bottom: 20px;
-            padding: 25px;
+            background-color: var(--color-surface);
+            padding: var(--space-4);
             border-radius: 10px;
+            margin-bottom: var(--space-3);
+
+            /* Cada projeto ocupa 4 das 12 colunas */
+            grid-column: span 4;
         }
 
         section h2 {
-            color: #386641;
+            color: var(--color-primary);
+            font-size: var(--font-size-lg);
+        }
+
+        section h3 {
+            font-size: var(--font-size-md);
         }
 
         footer {
-            background-color: #2f3e2f;
-            color: white;
+            background-color: var(--color-text);
+            color: var(--color-surface);
             text-align: center;
-            padding: 20px;
-            margin-top: 40px;
+            padding: var(--space-3);
+            margin-top: var(--space-6);
+        }
+
+        /* Breakpoint 1 - telas panorâmicas */
+        @media (max-width: 1200px) {
+            main {
+                padding: 0 var(--space-4);
+            }
+        }
+
+        /* Breakpoint 2 - desktops menores */
+        @media (max-width: 992px) {
+            section {
+                grid-column: span 6;
+            }
+        }
+
+        /* Breakpoint 3 - tablets */
+        @media (max-width: 768px) {
+            main {
+                grid-template-columns: repeat(6, 1fr);
+            }
+
+            section {
+                grid-column: 1 / -1;
+            }
+
+            header h1 {
+                font-size: var(--font-size-lg);
+            }
+        }
+
+        /* Breakpoint 4 - celulares */
+        @media (max-width: 576px) {
+            main {
+                grid-template-columns: repeat(4, 1fr);
+                padding: 0 var(--space-2);
+            }
+
+            header {
+                padding: var(--space-5) var(--space-2);
+            }
+
+            header p {
+                font-size: var(--font-size-base);
+            }
+
+            nav a {
+                display: inline-block;
+                margin: var(--space-1);
+            }
+
+            section {
+                grid-column: 1 / -1;
+                padding: var(--space-3);
+            }
+        }
+
+        /* Breakpoint 5 - celulares pequenos */
+        @media (max-width: 400px) {
+            main {
+                grid-template-columns: 1fr;
+            }
+
+            section,
+            main > p {
+                grid-column: 1;
+            }
+
+            header h1 {
+                font-size: var(--font-size-md);
+            }
+
+            section h2 {
+                font-size: var(--font-size-md);
+            }
         }
     </style>
 </head>
@@ -90,6 +227,7 @@
     </nav>
 
     <main>
+
         <p>
             Conheça as iniciativas da Rede Florescer e descubra como
             nossas ações contribuem para a transformação social.
@@ -97,11 +235,14 @@
 
         <section>
             <h2>Educação e oportunidades</h2>
+
             <p>
                 Promovemos atividades educativas e ações de capacitação
                 para ampliar o acesso ao conhecimento e às oportunidades.
             </p>
+
             <h3>Quem pode participar?</h3>
+
             <p>
                 Pessoas da comunidade interessadas em aprender, desenvolver
                 novas habilidades e construir novas possibilidades.
@@ -110,11 +251,14 @@
 
         <section>
             <h2>Apoio comunitário</h2>
+
             <p>
                 Desenvolvemos ações de apoio para pessoas e famílias em
                 situação de vulnerabilidade social.
             </p>
+
             <h3>Como funciona?</h3>
+
             <p>
                 As ações são realizadas com o apoio de voluntários e
                 parceiros que contribuem para fortalecer a comunidade.
@@ -123,16 +267,20 @@
 
         <section>
             <h2>Inclusão e cidadania</h2>
+
             <p>
                 Criamos iniciativas que incentivam a inclusão, a participação
                 social e o acesso a direitos e oportunidades.
             </p>
+
             <h3>Como contribuir?</h3>
+
             <p>
                 Você pode participar como voluntário, divulgar nossas ações
                 ou realizar uma doação.
             </p>
         </section>
+
     </main>
 
     <footer>
