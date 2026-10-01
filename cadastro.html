@@ -4,131 +4,287 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quero ajudar | Rede Florescer</title>
+    <title>Cadastro - Rede Florescer</title>
 
     <style>
+        :root {
+            --color-primary: #386641;
+            --color-secondary: #6a994e;
+            --color-accent: #a7c957;
+            --color-highlight: #f2e8cf;
+            --color-background: #f5f7f2;
+            --color-surface: #ffffff;
+            --color-text: #2f3e2f;
+            --color-border: #b7c9ad;
+            --color-error: #b3261e;
+            --color-success: #2e7d32;
+
+            --font-family: Arial, sans-serif;
+            --font-size-xl: 2.5rem;
+            --font-size-lg: 2rem;
+            --font-size-md: 1.5rem;
+            --font-size-base: 1rem;
+            --font-size-sm: 0.875rem;
+
+            --space-1: 4px;
+            --space-2: 8px;
+            --space-3: 16px;
+            --space-4: 24px;
+            --space-5: 32px;
+            --space-6: 48px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             margin: 0;
-            font-family: Arial, sans-serif;
+            font-family: var(--font-family);
+            font-size: var(--font-size-base);
             line-height: 1.6;
-            background-color: #f5f7f2;
-            color: #2f3e2f;
+            background-color: var(--color-background);
+            color: var(--color-text);
         }
 
         header {
-            background-color: #6a994e;
-            color: white;
+            background-color: var(--color-secondary);
+            color: var(--color-surface);
             text-align: center;
-            padding: 40px 20px;
+            padding: var(--space-6) var(--space-3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
 
         header h1 {
             margin: 0;
-            font-size: 40px;
+            font-size: var(--font-size-xl);
         }
 
         header p {
-            margin: 10px 0 0;
-            font-size: 18px;
+            margin: var(--space-2) 0 0;
+            font-size: var(--font-size-md);
         }
 
         nav {
-            background-color: #386641;
-            text-align: center;
-            padding: 15px;
+            background-color: var(--color-primary);
+            padding: var(--space-3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: var(--space-3);
+            flex-wrap: wrap;
         }
 
         nav a {
-            color: white;
+            color: var(--color-surface);
             text-decoration: none;
-            margin: 0 15px;
             font-weight: bold;
         }
 
-        nav a:hover {
+        nav a:hover,
+        nav a:focus-visible {
             text-decoration: underline;
         }
 
         main {
-            max-width: 800px;
-            margin: 30px auto;
-            padding: 0 20px;
+            max-width: 1200px;
+            margin: var(--space-5) auto;
+            padding: 0 var(--space-3);
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: var(--space-3);
         }
 
-        section {
-            background-color: white;
-            padding: 25px;
+        main > section {
+            grid-column: 3 / span 8;
+            background-color: var(--color-surface);
+            padding: var(--space-5);
             border-radius: 10px;
         }
 
-        section h2 {
-            color: #386641;
+        h2 {
+            color: var(--color-primary);
+            font-size: var(--font-size-lg);
         }
 
         form {
-            margin-top: 20px;
-        }
-
-        fieldset {
-            border: 1px solid #b7c9ad;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            padding: 20px;
-        }
-
-        legend {
-            color: #386641;
-            font-weight: bold;
-            padding: 0 8px;
+            display: grid;
+            gap: var(--space-3);
         }
 
         label {
-            display: block;
-            margin-top: 15px;
             font-weight: bold;
         }
 
         input,
         select {
             width: 100%;
-            box-sizing: border-box;
-            padding: 10px;
-            margin-top: 5px;
-            border: 1px solid #aaa;
-            border-radius: 5px;
-            font-size: 16px;
+            padding: var(--space-2);
+            border: 2px solid var(--color-border);
+            border-radius: 6px;
+            font: inherit;
+            background-color: var(--color-surface);
+            color: var(--color-text);
+            transition: border-color 0.2s ease,
+                background-color 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+        input:focus-visible,
+        select:focus-visible {
+            outline: 3px solid var(--color-accent);
+            outline-offset: 2px;
+            border-color: var(--color-primary);
+        }
+
+        input.valido,
+        select.valido {
+            border-color: var(--color-success);
+            background-color: #f3faf3;
+        }
+
+        input.invalido,
+        select.invalido {
+            border-color: var(--color-error);
+            background-color: #fff5f5;
+        }
+
+        fieldset {
+            border: 2px solid var(--color-border);
+            border-radius: 8px;
+            padding: var(--space-3);
+        }
+
+        fieldset:focus-within {
+            border-color: var(--color-primary);
+        }
+
+        legend {
+            font-weight: bold;
+            padding: 0 var(--space-2);
+        }
+
+        .opcao {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+            margin: var(--space-2) 0;
         }
 
         input[type="radio"] {
             width: auto;
-            margin-right: 5px;
-        }
-
-        .opcao {
-            font-weight: normal;
-            margin-top: 8px;
+            margin: 0;
         }
 
         button {
-            background-color: #386641;
-            color: white;
-            border: none;
-            padding: 12px 25px;
+            padding: var(--space-3);
+            border: 2px solid var(--color-primary);
             border-radius: 6px;
-            font-size: 16px;
+            background-color: var(--color-primary);
+            color: var(--color-surface);
+            font: inherit;
+            font-weight: bold;
             cursor: pointer;
+            transition: background-color 0.2s ease,
+                border-color 0.2s ease,
+                box-shadow 0.2s ease,
+                opacity 0.2s ease;
         }
 
         button:hover {
-            background-color: #6a994e;
+            background-color: var(--color-secondary);
+            border-color: var(--color-secondary);
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        button:focus-visible {
+            outline: 3px solid var(--color-accent);
+            outline-offset: 3px;
+        }
+
+        button:active {
+            background-color: var(--color-accent);
+            border-color: var(--color-primary);
+            box-shadow: none;
+        }
+
+        button:disabled {
+            background-color: #cccccc;
+            border-color: #aaaaaa;
+            color: #666666;
+            opacity: 0.6;
+            cursor: not-allowed;
+            box-shadow: none;
         }
 
         footer {
-            background-color: #2f3e2f;
-            color: white;
+            background-color: var(--color-text);
+            color: var(--color-surface);
             text-align: center;
-            padding: 20px;
-            margin-top: 40px;
+            padding: var(--space-3);
+            margin-top: var(--space-6);
+        }
+
+        @media (max-width: 1200px) {
+            main {
+                padding: 0 var(--space-4);
+            }
+        }
+
+        @media (max-width: 992px) {
+            main > section {
+                grid-column: 2 / span 10;
+            }
+        }
+
+        @media (max-width: 768px) {
+            main {
+                grid-template-columns: repeat(6, 1fr);
+            }
+
+            main > section {
+                grid-column: 1 / -1;
+            }
+
+            header h1 {
+                font-size: var(--font-size-lg);
+            }
+        }
+
+        @media (max-width: 576px) {
+            main {
+                grid-template-columns: repeat(4, 1fr);
+                padding: 0 var(--space-2);
+            }
+
+            header {
+                padding: var(--space-5) var(--space-2);
+            }
+
+            main > section {
+                padding: var(--space-3);
+            }
+        }
+
+        @media (max-width: 400px) {
+            main {
+                grid-template-columns: 1fr;
+            }
+
+            main > section {
+                grid-column: 1;
+            }
+
+            header h1 {
+                font-size: var(--font-size-md);
+            }
+
+            h2 {
+                font-size: var(--font-size-md);
+            }
         }
     </style>
 </head>
@@ -137,7 +293,7 @@
 
     <header>
         <h1>Rede Florescer</h1>
-        <p>Conectando pessoas, cultivando oportunidades.</p>
+        <p>Transformando vidas através da solidariedade.</p>
     </header>
 
     <nav aria-label="Navegação principal">
@@ -147,165 +303,87 @@
     </nav>
 
     <main>
-
         <section>
             <h2>Quero ajudar</h2>
 
             <p>
-                Faça parte da Rede Florescer. Preencha o formulário abaixo
-                para demonstrar seu interesse em contribuir com nossas ações.
+                Preencha o formulário para demonstrar seu interesse em participar
+                das ações da Rede Florescer.
             </p>
 
-            <form id="formulario">
+            <form id="formCadastro">
 
-                <fieldset>
-                    <legend>Dados pessoais</legend>
-
+                <div>
                     <label for="nome">Nome completo</label>
-                    <input
-                        type="text"
-                        id="nome"
-                        name="nome"
-                        required
-                        minlength="3"
+                    <input type="text" id="nome" name="nome"
+                        required minlength="3"
                         autocomplete="name"
-                    >
+                        placeholder="Digite seu nome">
+                </div>
 
+                <div>
                     <label for="email">E-mail</label>
-                    <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        required
-                        autocomplete="email"
-                    >
+                    <input type="email" id="email" name="email"
+                        required autocomplete="email"
+                        placeholder="exemplo@email.com">
+                </div>
 
+                <div>
                     <label for="cpf">CPF</label>
-                    <input
-                        type="text"
-                        id="cpf"
-                        name="cpf"
-                        required
-                        inputmode="numeric"
-                        maxlength="14"
-                        placeholder="000.000.000-00"
-                    >
+                    <input type="text" id="cpf" name="cpf"
+                        required minlength="14" maxlength="14"
+                        placeholder="000.000.000-00">
+                </div>
 
+                <div>
                     <label for="telefone">Telefone</label>
-                    <input
-                        type="tel"
-                        id="telefone"
-                        name="telefone"
-                        required
-                        inputmode="numeric"
-                        maxlength="15"
-                        placeholder="(00) 00000-0000"
-                    >
-                </fieldset>
+                    <input type="tel" id="telefone" name="telefone"
+                        required minlength="14" maxlength="15"
+                        autocomplete="tel"
+                        placeholder="(00) 00000-0000">
+                </div>
 
-                <fieldset>
-                    <legend>Endereço</legend>
-
-                    <label for="cep">CEP</label>
-                    <input
-                        type="text"
-                        id="cep"
-                        name="cep"
-                        required
-                        inputmode="numeric"
-                        maxlength="9"
-                        placeholder="00000-000"
-                    >
-
+                <div>
                     <label for="endereco">Endereço</label>
-                    <input
-                        type="text"
-                        id="endereco"
-                        name="endereco"
-                        required
-                        autocomplete="street-address"
-                    >
+                    <input type="text" id="endereco" name="endereco"
+                        required autocomplete="street-address"
+                        placeholder="Digite seu endereço">
+                </div>
 
-                    <label for="numero">Número</label>
-                    <input
-                        type="text"
-                        id="numero"
-                        name="numero"
-                        required
-                        inputmode="numeric"
-                    >
-
+                <div>
                     <label for="cidade">Cidade</label>
-                    <input
-                        type="text"
-                        id="cidade"
-                        name="cidade"
-                        required
-                        autocomplete="address-level2"
-                    >
+                    <input type="text" id="cidade" name="cidade"
+                        required autocomplete="address-level2"
+                        placeholder="Digite sua cidade">
+                </div>
 
-                    <label for="estado">Estado</label>
-                    <select id="estado" name="estado" required>
-                        <option value="">Selecione</option>
-                        <option value="AC">Acre</option>
-                        <option value="AL">Alagoas</option>
-                        <option value="AP">Amapá</option>
-                        <option value="AM">Amazonas</option>
-                        <option value="BA">Bahia</option>
-                        <option value="CE">Ceará</option>
-                        <option value="DF">Distrito Federal</option>
-                        <option value="ES">Espírito Santo</option>
-                        <option value="GO">Goiás</option>
-                        <option value="MA">Maranhão</option>
-                        <option value="MT">Mato Grosso</option>
-                        <option value="MS">Mato Grosso do Sul</option>
-                        <option value="MG">Minas Gerais</option>
-                        <option value="PA">Pará</option>
-                        <option value="PB">Paraíba</option>
-                        <option value="PR">Paraná</option>
-                        <option value="PE">Pernambuco</option>
-                        <option value="PI">Piauí</option>
-                        <option value="RJ">Rio de Janeiro</option>
-                        <option value="RN">Rio Grande do Norte</option>
-                        <option value="RS">Rio Grande do Sul</option>
-                        <option value="RO">Rondônia</option>
-                        <option value="RR">Roraima</option>
-                        <option value="SC">Santa Catarina</option>
-                        <option value="SP">São Paulo</option>
-                        <option value="SE">Sergipe</option>
-                        <option value="TO">Tocantins</option>
-                    </select>
-                </fieldset>
+                <div>
+                    <label for="cep">CEP</label>
+                    <input type="text" id="cep" name="cep"
+                        required minlength="9" maxlength="9"
+                        autocomplete="postal-code"
+                        placeholder="00000-000">
+                </div>
 
                 <fieldset>
-                    <legend>Como você quer participar?</legend>
+                    <legend>Como você deseja participar?</legend>
 
                     <label class="opcao">
-                        <input
-                            type="radio"
-                            name="participacao"
-                            value="voluntario"
-                            required
-                        >
-                        Quero ser voluntário
+                        <input type="radio" name="participacao"
+                            value="voluntario" required>
+                        Seja voluntário
                     </label>
 
                     <label class="opcao">
-                        <input
-                            type="radio"
-                            name="participacao"
-                            value="doador"
-                        >
-                        Quero realizar uma doação
+                        <input type="radio" name="participacao"
+                            value="doacao">
+                        Faça uma doação
                     </label>
 
                     <label class="opcao">
-                        <input
-                            type="radio"
-                            name="participacao"
-                            value="divulgacao"
-                        >
-                        Quero divulgar a causa
+                        <input type="radio" name="participacao"
+                            value="divulgacao">
+                        Divulgue nossa causa
                     </label>
                 </fieldset>
 
@@ -313,7 +391,6 @@
 
             </form>
         </section>
-
     </main>
 
     <footer>
@@ -322,40 +399,91 @@
     </footer>
 
     <script>
+        const form = document.getElementById("formCadastro");
+        const campos = form.querySelectorAll("input:not([type='radio'])");
+
         const cpf = document.getElementById("cpf");
         const telefone = document.getElementById("telefone");
         const cep = document.getElementById("cep");
 
+        function validarCampo(campo) {
+            if (campo.value.trim() === "") {
+                campo.classList.remove("valido", "invalido");
+                return;
+            }
+
+            if (campo.checkValidity()) {
+                campo.classList.add("valido");
+                campo.classList.remove("invalido");
+            } else {
+                campo.classList.add("invalido");
+                campo.classList.remove("valido");
+            }
+        }
+
+        campos.forEach(function (campo) {
+            campo.addEventListener("input", function () {
+                validarCampo(campo);
+            });
+
+            campo.addEventListener("blur", function () {
+                validarCampo(campo);
+            });
+        });
+
         cpf.addEventListener("input", function () {
-            let valor = cpf.value.replace(/\D/g, "");
+            let valor = cpf.value.replace(/\D/g, "").slice(0, 11);
 
             valor = valor.replace(/(\d{3})(\d)/, "$1.$2");
             valor = valor.replace(/(\d{3})(\d)/, "$1.$2");
             valor = valor.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
 
             cpf.value = valor;
+            validarCampo(cpf);
         });
 
         telefone.addEventListener("input", function () {
-            let valor = telefone.value.replace(/\D/g, "");
+            let valor = telefone.value.replace(/\D/g, "").slice(0, 11);
 
-            valor = valor.replace(/^(\d{2})(\d)/g, "($1) $2");
-            valor = valor.replace(/(\d{5})(\d{4})$/, "$1-$2");
+            if (valor.length <= 10) {
+                valor = valor.replace(/(\d{2})(\d)/, "($1) $2");
+                valor = valor.replace(/(\d{4})(\d)/, "$1-$2");
+            } else {
+                valor = valor.replace(/(\d{2})(\d)/, "($1) $2");
+                valor = valor.replace(/(\d{5})(\d)/, "$1-$2");
+            }
 
             telefone.value = valor;
+            validarCampo(telefone);
         });
 
         cep.addEventListener("input", function () {
-            let valor = cep.value.replace(/\D/g, "");
+            let valor = cep.value.replace(/\D/g, "").slice(0, 8);
 
-            valor = valor.replace(/^(\d{5})(\d)/, "$1-$2");
+            valor = valor.replace(/(\d{5})(\d)/, "$1-$2");
 
             cep.value = valor;
+            validarCampo(cep);
         });
 
-        document.getElementById("formulario").addEventListener("submit", function (evento) {
-            evento.preventDefault();
-            alert("Cadastro enviado com sucesso! Obrigado por fazer parte da Rede Florescer.");
+        form.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            campos.forEach(function (campo) {
+                validarCampo(campo);
+            });
+
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+
+            alert("Cadastro enviado com sucesso!");
+            form.reset();
+
+            campos.forEach(function (campo) {
+                campo.classList.remove("valido", "invalido");
+            });
         });
     </script>
 
